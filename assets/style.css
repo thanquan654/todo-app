@@ -36,8 +36,6 @@ body {
   min-height: 100vh;
   padding: 30px;
   min-width: 700px;
-  /* ! Xoa di sau responesive */
-  /* border: 1px solid; */
 }
 @media screen and (max-width: 768px) {
   .container {
@@ -286,6 +284,9 @@ body {
 
 /* !! Responsive */
 @media screen and (max-width: 767.98px) {
+  .category {
+    margin: -20px;
+  }
   .category .category-item {
     display: none;
   }
