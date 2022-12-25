@@ -18,9 +18,10 @@ const app = {
         let i =-1
         let html = 
         this.list.map((todo) => {
+            let distant = this.countDeadline(todo)
             i++
             return `
-                    <li class="todo-item">
+                    <li class="todo-item ${distant.status}">
                         <div onclick="app.statusChange(${i})" class="status-btn">
                             <i class="doing fa-regular fa-circle"></i>
                         </div>
@@ -28,7 +29,7 @@ const app = {
                             <h2 class="info-name">${todo.work}</h2>
                             <div class="info-deadline">
                                 <i class="fa-solid fa-clock"></i>
-                                <span class="time">${(todo.deadline).replace("T"," / ")}</span>
+                                <span class="time title="${(todo.deadline).replace("T"," / ")}"> ${distant.mgs}</span>
                             </div>
                         </div>
                         <div class="category">
@@ -54,7 +55,7 @@ const app = {
                             <h2 class="info-name">${todo.work}</h2>
                             <div class="info-deadline">
                                 <i class="fa-solid fa-clock"></i>
-                                <span class="time">Completed</span>
+                                <span class="time">Hoàn thành rùi:))</span>
                             </div>
                         </div>
                         <div class="category">
@@ -67,6 +68,15 @@ const app = {
                 ` 
         })
         completeTodoList.innerHTML = html2.join("")
+    },
+    addTodo: function () {
+        this.list.push(
+            {
+                work: $$("input")[0].value,
+                deadline: $$("input")[1].value,
+                category: $$("input")[2].value,
+            }
+        )
     },
     deleteTodo: function (index) {
         this.list.splice(index, 1)
@@ -90,6 +100,38 @@ const app = {
             })
         });
     },
+    countDeadline: function (todo) {
+        const now = new Date().getTime()
+        const deadlineTodo = new Date(todo.deadline).getTime()
+        const distant = deadlineTodo - now
+        const days = Math.floor(distant / 86400000)
+        const hours = Math.floor((distant%86400000) /  3600000)
+
+        if (distant < 0) {
+            return {
+                status: "out-of-date",
+                mgs: "Quá hạn mất rùi:(("
+
+            }
+        } else {
+            if (days > 0) {
+                return {
+                    mgs: `Còn khoảng ${days} ngày`,
+                    status: "low"
+                }
+            } else if (hours > 0) {
+                return {
+                    status: "medium",
+                    mgs: `Còn khoảng ${hours} giờ`
+                }
+            } else {
+                return {
+                    status: "high",
+                    mgs: `Làm đi ba, còn dưới 1 giờ thui đó`
+                }
+            }
+        }
+    },
 
     eventHandle: function() {
         const _this = this
@@ -103,20 +145,14 @@ const app = {
 
         // ? Khi nhap xong form
         formAddBtn.addEventListener("click", () => {
-            _this.list.push(
-                {
-                    work: $$("input")[0].value,
-                    deadline: $$("input")[1].value,
-                    category: $$("input")[2].value,
-                }
-            )
-        // Clear cac o input
-        for (i=0; i< 3; i++) {
-            $$("input")[i].value = null
-        }
-        this.loadTodo()
-        deleteTodoBtns = $$(".delete-btn i")
-        statusBtns = $$(".status-btn i")
+            _this.addTodo()
+            // Clear cac o input
+            for (i=0; i< 3; i++) {
+                $$("input")[i].value = null
+            }
+            _this.loadTodo()
+            deleteTodoBtns = $$(".delete-btn i")
+            statusBtns = $$(".status-btn i")
       
         })
         
