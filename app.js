@@ -22,7 +22,7 @@ const app = {
             return `
                     <li class="todo-item">
                         <div onclick="app.statusChange(${i})" class="status-btn">
-                            <i class="fa-regular fa-circle"></i>
+                            <i class="doing fa-regular fa-circle"></i>
                         </div>
                         <div class="info">
                             <h2 class="info-name">${todo.work}</h2>
@@ -47,8 +47,8 @@ const app = {
             j++
             return `
                     <li class="todo-item complete">
-                        <div class="status-btn">
-                            <i class="fa-solid fa-circle-check"></i>
+                        <div onclick="app.statusChange(${j})" class="status-btn ">
+                            <i class="done fa-solid fa-circle-check"></i>
                         </div>
                         <div class="info">
                             <h2 class="info-name">${todo.work}</h2>
@@ -77,9 +77,18 @@ const app = {
         this.loadTodo()
     },
     statusChange: function(index) {
-        let completeTodo = this.list.splice(index, 1)
-        this.completeList.push(...completeTodo)
-        this.loadTodo()
+        $$(".status-btn i").forEach(btn => {
+            btn.addEventListener("click",(e) => {
+                if (e.target.classList.contains("doing")) {
+                    let completeTodo = this.list.splice(index, 1)
+                    this.completeList.push(...completeTodo)
+                    this.loadTodo()
+                } else {
+                    this.list.push(...this.completeList.splice(index, 1))
+                    this.loadTodo()
+                }
+            })
+        });
     },
 
     eventHandle: function() {
