@@ -1,0 +1,239 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+html {
+    font-size: 10px;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(160deg, #0093E980 0%, #80D0C780 100%);
+
+}
+/* ? Header CSS */
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  background-color: transparent;
+  min-height: 100vh;
+  padding: 30px;
+  min-width: 700px;
+  /* ! Xoa di sau responesive */
+  /* border: 1px solid; */
+}
+@media screen and (max-width: 768px) {
+  .container {
+    min-width: 100%;
+  }
+}
+
+.todo-heading{
+  display: flex;
+  justify-content: space-between;
+}
+.heading{
+  font-family: monospace;
+  font-size: 3.5rem;
+}
+.add-work-btn{
+  padding: 5px 20px;
+  font-size: 1.5rem;
+  border: none;
+  background-color: #3A3A3C;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-work-btn:hover {
+  opacity: 0.9;
+}
+
+/* ? Todo CSS */
+.todo-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.todo-item{
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  gap: 13px;
+  padding: 15px 10px;
+  border: 2px solid #E1E5EE;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+.todo-item:hover {
+  transform: translateY(-2px);
+  transition: transform .4s;
+}
+
+.status-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.status-btn i {
+  font-size: 3rem;
+  color: rgb(103, 231, 92);
+  cursor: pointer;
+}
+
+.info{
+  flex: 1;
+}
+  .info-name{
+    color: #000;
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin-bottom: 3px;
+  }
+  .info-deadline{
+
+  }
+  .info-deadline i {
+    color: #555861;
+    opacity: .7;
+  }
+  .time{
+    color: #555861;
+  }
+
+.category{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .category .category-item {
+    font-size: 1.3rem;
+    font-weight: 600;
+    background-color: #ccc;
+    padding: 7px 5px;
+    border-radius: 5px;
+  }
+.delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  .delete-btn i {
+    padding: 10px;
+    font-size: 1.8rem;
+  }
+  .delete-btn:hover i {
+    background-color: #ccc;
+    border-radius: 50%;
+    opacity: .85;
+  } 
+.complete-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* ? Modal CSS  */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.modal-content {
+  background-color:#FFFFFF;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 10;
+  padding: 30px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 100rem;
+  color: white;
+  background-color: #eee;
+  padding: 5px;
+  transform: translate(50%, -50%);
+}
+.modal-close:hover {
+  color: rgb(209, 34, 34);
+}
+
+.modal-main {
+  overscroll-behavior-y: contain;
+}
+.awf-title {
+  font-size: 3rem;
+  font-family: monospace;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+  border-bottom: #000 1px solid;
+}
+.add-work-form {
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  flex-direction:column;
+  gap: 20px;
+  font-size: 1.6rem;
+  margin: 0 25px;
+}
+  .add-work-form input {
+    padding: 7px 10px;
+    width: 290px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .add-work-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .add-work-form button {
+    border: none;
+    background-color: #4EBD51;
+    color: #FFFFFF;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  .add-work-form button:hover {
+    transform: translateY(1px);
+    opacity: .8;
+  }
