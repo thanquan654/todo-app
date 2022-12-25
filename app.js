@@ -26,7 +26,7 @@ const app = {
                             <i class="doing fa-regular fa-circle"></i>
                         </div>
                         <div class="info">
-                            <h2 class="info-name">${todo.work}</h2>
+                            <h2 class="info-name contenteditable="false"">${todo.work}</h2>
                             <div class="info-deadline">
                                 <i class="fa-solid fa-clock"></i>
                                 <span class="time title="${(todo.deadline).replace("T"," / ")}"> ${distant.mgs}</span>
@@ -35,8 +35,13 @@ const app = {
                         <div class="category">
                             <span class="category-item">${todo.category}</span>
                         </div>
-                        <div onclick="app.deleteTodo(${i})" class="delete-btn">
-                            <i class="fa-solid fa-trash"></i>
+                        <div class="action-btn">
+                            <div onclick="app.changeEdit()" class="edit-btn">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div onclick="app.deleteTodo(${i})" class="delete-btn">
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
                         </div>
                     </li>
                 `      
@@ -99,6 +104,20 @@ const app = {
                 }
             })
         });
+    },
+    changeEdit: function() {
+        $$(".edit-btn i").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.target.parentElement.classList.toggle("active") 
+                // Lay ".info-name"
+                const nameEditable = e.target.parentElement.parentElement.parentElement.children[1].children[0].contentEditable
+                if (nameEditable === "true") {
+                    e.target.parentElement.parentElement.parentElement.children[1].children[0].contentEditable = false
+                } else {
+                    e.target.parentElement.parentElement.parentElement.children[1].children[0].contentEditable = true
+                }
+            })
+        })
     },
     countDeadline: function (todo) {
         const now = new Date().getTime()

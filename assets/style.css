@@ -77,7 +77,7 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 13px;
-  padding: 15px 10px;
+  padding: 8px 10px;
   border: 3px solid #fff;
   border-radius: 15px;
   font-size: 1.5rem;
@@ -112,12 +112,17 @@ body {
 
 .info{
   flex: 1;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  flex-direction:column;
 }
   .info-name{
     color: #000;
     font-weight: 600;
     font-size: 1.8rem;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
   }
   .info-deadline{
 
@@ -142,13 +147,25 @@ body {
     padding: 7px 5px;
     border-radius: 5px;
   }
+.edit-btn i{
+  padding: 7px;
+  font-size: 1.8rem;
+}
+.edit-btn:hover i {
+  background-color: #ccc;
+  border-radius: 50%;
+  opacity: .85;
+} 
+.edit-btn.active i {
+  color: rgb(207, 16, 16);
+}
 .delete-btn {
   display: flex;
   justify-content: center;
   align-items: center;
 }
   .delete-btn i {
-    padding: 10px;
+    padding: 7px;
     font-size: 1.8rem;
   }
   .delete-btn:hover i {
@@ -264,4 +281,16 @@ body {
 .todo-item.complete .category .category-item {
   background-color: #ccc;
   color: rgb(219, 215, 215);
+}
+
+
+/* !! Responsive */
+@media screen and (max-width: 767.98px) {
+  .category .category-item {
+    display: none;
+  }
+  .edit-btn i, 
+  .delete-btn i {
+    padding: 10px;
+  }
 }
