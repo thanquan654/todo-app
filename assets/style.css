@@ -237,3 +237,19 @@ body {
     transform: translateY(1px);
     opacity: .8;
   }
+
+.todo-item.complete {
+  background-color: #d9d9d9;
+  opacity: 0.9;
+}
+.todo-item.complete .status-btn i {
+  color: rgb(128, 196, 145) ;
+}
+.todo-item.complete .info .info-name,
+.todo-item.complete .info .info-deadline {
+  color: #ccc;
+}
+.todo-item.complete .category .category-item {
+  background-color: #ccc;
+  color: rgb(219, 215, 215);
+}

@@ -28,7 +28,7 @@ const app = {
                             <h2 class="info-name">${todo.work}</h2>
                             <div class="info-deadline">
                                 <i class="fa-solid fa-clock"></i>
-                                <span class="time">${todo.deadline}</span>
+                                <span class="time">${(todo.deadline).replace("T"," / ")}</span>
                             </div>
                         </div>
                         <div class="category">
@@ -41,12 +41,12 @@ const app = {
                 `      
         })
         todoList.innerHTML = html.join("")
-        i =-1
+        let j =-1
         let html2 = 
         this.completeList.map((todo) => {
-            i++
+            j++
             return `
-                    <li class="todo-item">
+                    <li class="todo-item complete">
                         <div class="status-btn">
                             <i class="fa-solid fa-circle-check"></i>
                         </div>
@@ -54,13 +54,13 @@ const app = {
                             <h2 class="info-name">${todo.work}</h2>
                             <div class="info-deadline">
                                 <i class="fa-solid fa-clock"></i>
-                                <span class="time">${todo.deadline}</span>
+                                <span class="time">Completed</span>
                             </div>
                         </div>
                         <div class="category">
                             <span class="category-item">${todo.category}</span>
                         </div>
-                        <div onclick="app.deleteCompleteTodo(${i})" class="delete-btn">
+                        <div onclick="app.deleteCompleteTodo(${j})" class="delete-btn">
                             <i class="fa-solid fa-trash"></i>
                         </div>
                     </li>
@@ -77,9 +77,8 @@ const app = {
         this.loadTodo()
     },
     statusChange: function(index) {
-        this.list.splice(index, 1)
-        let completeTodo = this.list.slice(index, 1)
-        this.completeList.push(completeTodo)
+        let completeTodo = this.list.splice(index, 1)
+        this.completeList.push(...completeTodo)
         this.loadTodo()
     },
 
